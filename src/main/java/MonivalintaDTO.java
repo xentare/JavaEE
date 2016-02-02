@@ -37,4 +37,12 @@ public class MonivalintaDTO {
 
     }
 
+    @Override
+    public String toString() {
+        String string = "";
+        for(VaihtoehtoDTO i : vaihtoehtoDTOs){
+            string += (i.toString()) + " ";
+        };
+        return kysymys + " Vaihtoehdot: " + string;
+    }
 }

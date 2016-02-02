@@ -43,4 +43,8 @@ public class VaihtoehtoDTO {
 
     }
 
+    @Override
+    public String toString() {
+        return teksti;
+    }
 }

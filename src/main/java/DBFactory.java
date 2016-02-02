@@ -13,7 +13,11 @@ import java.util.Vector;
  */
 public class DBFactory {
 
-    Connection connection;
+    public Connection getConnection() {
+        return connection;
+    }
+
+    private Connection connection;
 
     public DBFactory() {
         String url = "jdbc:mysql://localhost:3306/mydb";
@@ -29,16 +33,14 @@ public class DBFactory {
         }
     }
 
-    public ResultSet preparedQuery(String query, Map<String,Type> params) {
+    public ResultSet preparedQuery(String query, String[] params) {
         CachedRowSetImpl rowSet = null;
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             if(!params.equals("")) {
-
-                for(Map.Entry<String,Type> entry : params.entrySet()) {
-
+                for(int i = 0; i < params.length; i++) {
+                    statement.setString(i+1,params[i]);
                 }
-
             }
             ResultSet rs = statement.executeQuery();
             rowSet = new CachedRowSetImpl();
